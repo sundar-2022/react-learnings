@@ -1,22 +1,33 @@
-function ListGroup() {
-  let items = ["Tirunelveli", "Chennai", "Madurai", "Trichy"];
-  //   items = [];
-  //   const message = items.length === 0 ? <p>No list found</p> : null;
-  //   function getMessage() {
-  //     return items.length === 0 ? <p>No list found</p> : null;
-  //   }
+import React, { useState } from "react";
+
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
   return (
     <>
-      <h1>List</h1>
+      <h1>{heading}</h1>
       {items.length === 0 && <p>No list found</p>}
       <ul className="list-group list-group-flush">
-        {items.map((items) => (
+        {items.map((item, index) => (
           <li
-            className="list-group-item"
-            key={items}
-            onClick={() => console.log("Hello")}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            key={index}
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
           >
-            {items}
+            {item}
           </li>
         ))}
       </ul>
