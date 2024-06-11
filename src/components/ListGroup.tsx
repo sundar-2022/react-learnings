@@ -22,7 +22,7 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
                 : "list-group-item"
             }
             key={index}
-            onClick={() => {
+            onClick={() => { 
               setSelectedIndex(index);
               onSelectItem(item);
             }}
